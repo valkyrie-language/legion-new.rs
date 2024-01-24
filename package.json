@@ -1,24 +1,19 @@
 {
-    "name": "create-legion",
-    "version": "0.0.0",
-    "description": "Create the valkyrie legion",
-    "type": "module",
-    "main": "index.js",
-    "bin": {
-        "create-legion": "create.js"
-    },
-    "keywords": [
-        "rollup",
-        "rollup-template",
-        "library"
+    "private": true,
+    "workspaces": [
+        "projects/*"
     ],
-    "author": "192608617@qq.com",
-    "homepage": "https://github.com/valkyrie-language/legion-npx-create",
-    "license": "MIT",
-    "dependencies": {
-        "chalk": "2.4.2",
-        "fs-extra": "^10.1.0",
-        "prompts": "^2.4.2",
-        "validate-npm-package-name": "^5.0.1"
+    "scripts": {
+        "build": "cargo build --release",
+        "test": "cargo test --release",
+        "fmt": "cargo fmt --all",
+        "p": "git push && git push --tags --prune",
+        "reset": "git reset Head~ --soft",
+        "u": "cargo upgrade --incompatible"
+    },
+    "devDependencies": {
+        "@bytecodealliance/jco": "^1.8.1",
+        "@types/node": "^22",
+        "typescript": "^5.7.2"
     }
 }

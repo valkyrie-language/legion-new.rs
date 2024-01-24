@@ -1,8 +1,21 @@
-# create legion
+Rust Template Project
+=====================
 
-```bash
-npx create-legion <pkg-name>
-npm init rollup-pkg <pkg-name>
-yarn create rollup-pkg <pkg-name>
+Rust template project for monorepo
+
+## Single project directory structure
+
+```sh
+<Root>
+- source/      # Source Code
+- target/      # Artifacts
+- valor.toml   # Valor configuration
 ```
 
+## Multi-project directory structure
+
+```sh
+<Root>
+- config/valor.toml
+- valor.toml
+```
