@@ -1,51 +1,27 @@
-pub use self::{cmd_build::CommandBuild, cmd_encode::CommandEncode, cmd_run::CommandRun};
-use crate::{
-    LegionError,
-    commands::{cmd_decode::CommandDecode, cmd_polyfill::CommandPolyfill},
-};
-use clap::{Args, Subcommand};
-use std::path::PathBuf;
+use crate::{LegionCLI, NpxError, PackageType, ProjectType, errors::NpxErrorKind};
+use dialoguer::{Input, Select, theme::ColorfulTheme};
+use std::fmt::{Display, Formatter};
 
-mod cmd_build;
-mod cmd_decode;
-mod cmd_encode;
-mod cmd_polyfill;
-mod cmd_run;
-
-#[derive(Debug, Subcommand)]
-pub enum LegionCommands {
-    /// Build the legion project
-    Run(CommandRun),
-    /// Build the legion project
-    Build(CommandBuild),
-    /// encode `wat`, `wast` to wasm
-    Encode(CommandEncode),
-    /// decode `wasm` to `wat`
-    Decode(CommandDecode),
-    /// decode `wasm` to `js`
-    #[command(visible_alias = "shim")]
-    Polyfill(CommandPolyfill),
-}
-
-#[derive(Debug, Args)]
-pub struct LegionArguments {
-    /// Sets a custom config file
-    #[arg(short, long, value_name = "FILE")]
-    config: Option<PathBuf>,
-
-    /// Turn debugging information on
-    #[arg(short, long, action = clap::ArgAction::Count)]
-    debug: u8,
-}
-
-impl LegionCommands {
-    pub async fn run(self, arguments: &LegionArguments) -> Result<(), LegionError> {
-        match self {
-            Self::Run(cmd) => cmd.run(arguments).await,
-            Self::Build(cmd) => cmd.run(arguments).await,
-            Self::Encode(cmd) => cmd.run(arguments).await,
-            Self::Decode(cmd) => cmd.run(arguments).await,
-            Self::Polyfill(cmd) => cmd.run(arguments).await,
+impl LegionCLI {
+    pub async fn run(self) -> Result<(), NpxError> {
+        let name = self.get_name()?;
+        match ProjectType::ask()? {
+            ProjectType::Workspace => {}
+            ProjectType::Package => {
+                let package = PackageType::ask()?;
+            }
+        }
+        Ok(())
+    }
+    fn get_name(&self) -> Result<String, NpxError> {
+        match self.name.as_ref() {
+            Some(s) => Ok(s.to_string()),
+            None => {
+                let text = Input::with_theme(&ColorfulTheme::default())
+                    .with_prompt("Enter the name of the executable:")
+                    .interact_text()?;
+                Ok(text)
+            }
         }
     }
 }
