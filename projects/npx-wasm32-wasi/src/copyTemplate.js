@@ -1,6 +1,4 @@
-import prompts from "prompts";
-import {basename, dirname, resolve} from "node:path";
-import {fileURLToPath} from "node:url";
+import {basename, resolve} from "node:path";
 import {cp, readFile, writeFile} from "node:fs/promises";
 import chalk from "chalk";
 
@@ -19,60 +17,6 @@ import chalk from "chalk";
  * @returns {Promise<CopyTemplate>}
  */
 export async function copyTemplate (target, here, pkg) {
-    const {name, useWorkspace} = await prompts([
-        {
-            name: "name",
-            type: "text",
-            message: "What is the project name?",
-            initial: pkg,
-        },
-        {
-            name: "useWorkspace",
-            type: "select",
-            initial: 1,
-            message: "Do you want to make a workspace?",
-            choices: [
-                {
-                    title: "📚 Workspace",
-                    value: true,
-                },
-                {
-                    title: "📗 Package",
-                    value: false,
-                },
-            ],
-        }
-    ]);
-    let isBinary = false;
-    
-    if (!useWorkspace) {
-        const {isLibrary} = await prompts([
-                {
-                    name: "isLibrary",
-                    type: "select",
-                    initial: 0,
-                    message: "What kind of project is this?",
-                    choices: [
-                        {
-                            title: "🎓 Library",
-                            value: false,
-                        },
-                        {
-                            title: "📟 Commands",
-                            value: true,
-                        },
-                    ],
-                }
-            ]
-        )
-        isBinary = !isLibrary
-    }
-    const options = {
-        name,
-        useWorkspace,
-        isBinary
-    }
-    
     let source;
     if (options.useWorkspace) {
         source = resolve(here, "template/workspace");
