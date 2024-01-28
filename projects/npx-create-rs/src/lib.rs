@@ -10,7 +10,7 @@ pub use crate::types::{JspmType, PackageType};
 
 #[derive(Debug, Parser)]
 #[command(version, about, long_about = None)]
-pub struct LegionCLI {
+pub struct LegionNew {
     /// The project directory
     target: Option<String>,
     /// The project name
@@ -25,4 +25,7 @@ pub struct LegionCLI {
     /// The javascript package manager
     #[arg(long, visible_alias = "jspm")]
     javascript_package_manager: Option<JspmType>,
+    /// Dry run
+    #[arg(long)]
+    dry_run: bool,
 }

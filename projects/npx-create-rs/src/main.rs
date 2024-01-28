@@ -1,7 +1,7 @@
 use clap::Parser;
-use legion_npx::{LegionCLI, NpxError};
+use legion_new::{LegionNew, NpxError};
 
 #[tokio::main(flavor = "current_thread")]
 async fn main() -> Result<(), NpxError> {
-    LegionCLI::parse().run().await
+    LegionNew::parse().run().await
 }

@@ -1,7 +1,7 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="copy to npm" type="CargoCommandRunConfiguration" factoryName="Cargo Command">
+  <configuration default="false" name="Interactive Test" type="CargoCommandRunConfiguration" factoryName="Cargo Command">
     <option name="buildProfileId" value="test" />
-    <option name="command" value="test --package legion --lib cli_cmds::cmd_decode::tests::decode2 -- --exact" />
+    <option name="command" value="run -- --dry-run" />
     <option name="workingDirectory" value="file://$PROJECT_DIR$" />
     <envs />
     <option name="emulateTerminal" value="true" />

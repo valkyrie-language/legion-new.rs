@@ -21,11 +21,12 @@ impl JspmType {
         Ok(choices[selection])
     }
     pub async fn install(&self) -> Result<(), NpxError> {
-        let _cmd = match self {
+        let cmd = match self {
             JspmType::Npm => "npm i",
             JspmType::Pnpm => "pnpm i",
             JspmType::Yarn => "yarn",
         };
+        println!("Installing {}", cmd);
         Ok(())
     }
 }
