@@ -5,17 +5,24 @@ use clap::Parser;
 
 mod types;
 
-pub use crate::types::{PackageType, ProjectType};
+use crate::types::ProjectType;
+pub use crate::types::{JspmType, PackageType};
 
 #[derive(Debug, Parser)]
 #[command(version, about, long_about = None)]
 pub struct LegionCLI {
     /// The project directory
     target: Option<String>,
+    /// The project name
     #[arg(long)]
     name: Option<String>,
+    /// The project type
     #[arg(long)]
     project_type: Option<ProjectType>,
+    /// The package type
     #[arg(long)]
     package_type: Option<PackageType>,
+    /// The javascript package manager
+    #[arg(long, visible_alias = "jspm")]
+    javascript_package_manager: Option<JspmType>,
 }
