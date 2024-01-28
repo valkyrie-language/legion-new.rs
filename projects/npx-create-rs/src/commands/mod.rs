@@ -49,7 +49,12 @@ impl LegionNew {
         }
     }
     fn ask_override(&self, path: &Path) -> Result<bool, NpxError> {
-        let url = Url::from_directory_path(path).unwrap();
+        let url = match Url::from_directory_path(path) {
+            Ok(o) => {o}
+            Err(_) => {
+                panic!()
+            }
+        };
         let over = Confirm::with_theme(&ColorfulTheme::default())
             .with_prompt(format!("Do you want to remove exists {}?", url))
             .report(false)

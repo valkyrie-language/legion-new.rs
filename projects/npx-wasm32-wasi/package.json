@@ -1,22 +1,28 @@
 {
     "name": "create-legion",
-    "version": "0.0.1",
-    "description": "Create the valkyrie legion",
-    "type": "module",
-    "main": "index.js",
-    "bin": {
-        "create-legion": "legion-new.js",
-        "legion-new": "legion-new.js"
-    },
+    "author": "192608617@qq.com",
+    "version": "0.0.2",
+    "description": "Create new valkyrie legion",
     "keywords": [
         "rollup",
         "rollup-template",
         "library"
     ],
-    "author": "192608617@qq.com",
+    "license": "UNLICENSED",
     "homepage": "https://github.com/valkyrie-language/legion-npx-create",
-    "license": "MIT",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/valkyrie-language/legion-new.rs",
+        "directory": "projects/npx-wasm32-wasi"
+    },
+    "main": "src/index.js",
+    "type": "module",
+    "types": "src/index.d.ts",
+    "typings": "src/index.d.ts",
+    "bin": {
+        "create-legion": "create-legion.js"
+    },
     "dependencies": {
-
+        "@bytecodealliance/preview2-shim": "^0.17.1"
     }
 }

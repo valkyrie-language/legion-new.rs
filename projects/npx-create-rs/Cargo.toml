@@ -2,7 +2,7 @@
 name = "legion-new"
 version = "0.1.0"
 authors = ["Aster <192607617@qq.com>"]
-description = "Valkyrie workspace manager"
+description = "Create new legion projects"
 repository = "https://github.com/nyar-vm/valkyrie-valor"
 documentation = "https://docs.rs/valor-config"
 readme = "readme.md"
@@ -10,7 +10,6 @@ license = "MPL-2.0"
 edition = "2021"
 
 [dependencies]
-anyhow = "1.0.95"
 clap = { version = "4.5.27", features = ["derive"] }
 reqwest = { version = "0.12.12", features = ["socks"] }
 #inquire = "0.7.5"
